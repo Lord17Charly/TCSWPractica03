@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Charlie
+ * @author carlos
  */
 
 @Entity
@@ -40,7 +40,7 @@ public class Empleados implements Serializable{
     @Column
     private String telefono;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento_id") // columna FK en la tabla empleado2
+    @JoinColumn(name = "departamento_id") 
     private Departamento departamento;
     public Long getClave() {
         return clave;

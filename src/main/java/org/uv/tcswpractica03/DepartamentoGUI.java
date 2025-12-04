@@ -173,7 +173,7 @@ private DefaultListModel<String> listModelDept;
     private void btnDeptEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeptEliminarActionPerformed
         String claveText = txtDeptClave.getText().trim();
     if (claveText.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Introduce la clave del departamento a eliminar.");
+        JOptionPane.showMessageDialog(this, "clave del departamento a eliminar.");
         return;
     }
 
@@ -181,7 +181,7 @@ private DefaultListModel<String> listModelDept;
     try {
         id = Long.parseLong(claveText);
     } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "La clave debe ser un número.");
+        JOptionPane.showMessageDialog(this, "clave invalida");
         return;
     }
 
@@ -194,7 +194,7 @@ private DefaultListModel<String> listModelDept;
         txtDeptNombre.setText("");
         listModelDept.clear();
     } else {
-        JOptionPane.showMessageDialog(this, "No existe departamento con clave: " + id);
+        JOptionPane.showMessageDialog(this, "No existe clave: " + id);
     }
 
     }//GEN-LAST:event_btnDeptEliminarActionPerformed
@@ -202,7 +202,7 @@ private DefaultListModel<String> listModelDept;
     private void btnDeptGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeptGuardarActionPerformed
         String nombre = txtDeptNombre.getText().trim();
     if (nombre.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Escribe el nombre del departamento.");
+        JOptionPane.showMessageDialog(this, "Escribe departamento.");
         return;
     }
 
@@ -210,9 +210,9 @@ private DefaultListModel<String> listModelDept;
     d.setNombre(nombre);
 
     DAODepartamentos dao = new DAODepartamentos();
-    dao.guardar(d); // guarda; la secuencia debe asignar d.getClave()
+    dao.guardar(d); 
 
-    JOptionPane.showMessageDialog(this, "Departamento guardado con clave: " + d.getClave());
+    JOptionPane.showMessageDialog(this, "Departamento guardado " + d.getClave());
     txtDeptNombre.setText("");
 
     }//GEN-LAST:event_btnDeptGuardarActionPerformed
@@ -220,7 +220,7 @@ private DefaultListModel<String> listModelDept;
     private void btnDeptCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeptCargarActionPerformed
         String claveText = txtDeptClave.getText().trim();
     if (claveText.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Introduce la clave del departamento a cargar.");
+        JOptionPane.showMessageDialog(this, "ingrese clave de departamento");
         return;
     }
 
@@ -228,23 +228,21 @@ private DefaultListModel<String> listModelDept;
     try {
         id = Long.parseLong(claveText);
     } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "La clave debe ser un número.");
+        JOptionPane.showMessageDialog(this, "clave invalida");
         return;
     }
 
     DAODepartamentos dao = new DAODepartamentos();
     Departamento d = dao.findByID(id);
     if (d == null) {
-        JOptionPane.showMessageDialog(this, "Departamento no encontrado para la clave: " + id);
+        JOptionPane.showMessageDialog(this, "Departamento no encontrado " + id);
         listModelDept.clear();
         txtDeptNombre.setText("");
         return;
     }
 
-    // mostrar nombre en el campo
     txtDeptNombre.setText(d.getNombre());
 
-    // obtener empleados del departamento y mostrarlos en la JList
     List<Empleados> empleados = dao.getEmpleadosByDepartamento(id);
     listModelDept.clear();
     for (Empleados emp : empleados) {

@@ -37,7 +37,6 @@ public class DAODepartamentos {
         return list;
     }
 
-    // lista empleados de un departamento por id
     public List<Empleados> getEmpleadosByDepartamento(Long departamentoId) {
         Session session = HibernateUtils.getSession();
         Query<Empleados> q = session.createQuery(

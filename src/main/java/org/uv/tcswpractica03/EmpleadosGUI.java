@@ -219,13 +219,12 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     boolean ok = dao.guardar(emp);
 
     if (ok) {
-        JOptionPane.showMessageDialog(this, "Guardado con clave: " + emp.getClave());
-        // limpiar campos
+        JOptionPane.showMessageDialog(this, "Guardado clave: " + emp.getClave());
         txtNombre.setText("");
         txtDireccion.setText("");
         txtTelefono.setText("");
     } else {
-        JOptionPane.showMessageDialog(this, "Error al guardar");
+        JOptionPane.showMessageDialog(this, "Error en guardado");
     }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -248,14 +247,14 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     Empleados eliminado = dao.eliminar(id);
 
     if (eliminado != null) {
-        JOptionPane.showMessageDialog(this, "Empleado eliminado con clave: " + eliminado.getClave());
+        JOptionPane.showMessageDialog(this, "empleado eliminado: " + eliminado.getClave());
         
         txtClave.setText("");
         txtNombre.setText("");
         txtDireccion.setText("");
         txtTelefono.setText("");
     } else {
-        JOptionPane.showMessageDialog(this, "No se encontró un empleado con esa clave.");
+        JOptionPane.showMessageDialog(this, "No se encontró clave.");
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -267,7 +266,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         String txtId = txtClave.getText().trim();
 
     if (txtId.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese un ID para buscar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Ingrese ID ", "atencion", JOptionPane.WARNING_MESSAGE);
         return;
     }
 
@@ -275,7 +274,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     try {
         id = Long.parseLong(txtId);
     } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "ID invalido", "error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
@@ -285,7 +284,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     DefaultListModel<String> model = new DefaultListModel<>();
 
     if (emp != null) {
-        // Formatea la información que quieras mostrar en la JList
+        
         String line = String.format("ID: %d  Nombre: %s  Dirección: %s  Teléfono: %s",
                 emp.getClave(),
                 emp.getNombre() != null ? emp.getNombre() : "",
@@ -293,7 +292,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
                 emp.getTelefono() != null ? emp.getTelefono() : "");
         model.addElement(line);
     } else {
-        model.addElement("No se encontró empleado con ID: " + id);
+        model.addElement("No se encontró ID: " + id);
     }
 
     jListEmpleados.setModel(model);
